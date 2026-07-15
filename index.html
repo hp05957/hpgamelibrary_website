@@ -97,6 +97,36 @@
       z-index: 1;
     }
 
+    /* Backup Warning Banner */
+    .backup-warning {
+      background: rgba(255, 42, 42, 0.1);
+      border: 1px solid #ff2a2a;
+      color: #c5c6c7;
+      padding: 15px 30px;
+      border-radius: 4px;
+      margin-bottom: 40px;
+      display: inline-block;
+      box-shadow: 0 0 15px rgba(255, 42, 42, 0.2);
+      font-size: 1rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .backup-warning a {
+      color: #ff2a2a;
+      text-decoration: none;
+      font-weight: 900;
+      border-bottom: 2px solid #ff2a2a;
+      transition: all 0.3s ease;
+      margin: 0 5px;
+    }
+
+    .backup-warning a:hover {
+      color: #ffffff;
+      border-bottom-color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
     .hero h1 {
       font-size: 5rem;
       color: #ffffff;
@@ -149,6 +179,7 @@
     @media (max-width: 768px) {
       .hero h1 { font-size: 3rem; }
       .hero p { font-size: 1rem; }
+      .backup-warning { font-size: 0.8rem; padding: 10px 20px; }
       nav ul { display: none; }
     }
   </style>
@@ -169,6 +200,11 @@
 
   <main class="hero">
     <div class="hero-content">
+      
+      <div class="backup-warning">
+        ⚠ This is a backup site. <a href="https://hpgamelibrary.2bd.net/">Click here</a> to go to the main website.
+      </div>
+
       <h1>HPGameLibrary</h1>
       <p>Small, but safe and working library of cracked games.</p>
       
