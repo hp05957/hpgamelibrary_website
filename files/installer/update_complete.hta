@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="ie=9">
+    <title>Grand Theft Auto V Update Installer - Installation Complete</title>
+    
+    <HTA:APPLICATION
+        ID="MyHTA"
+        APPLICATIONNAME="GTA5UpdateInstaller"
+        BORDER="dialog"
+        SCROLL="no"
+        SINGLEINSTANCE="yes"
+        WINDOWSTATE="normal"
+        SYSMENU="yes"
+        CAPTION="yes"
+        INNERBORDER="no"
+        SELECTION="no"
+    >
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -ms-user-select: none;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111317;
+            color: #d1d5db;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Left Banner */
+        .banner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 280px;
+            bottom: 0;
+            background-color: #161822;
+            background-image: url('banner.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-right: 1px solid #2a2d3d;
+            z-index: 2;
+        }
+
+        /* Main Content Container */
+        .main-container {
+            position: absolute;
+            top: 0;
+            left: 280px;
+            right: 0;
+            bottom: 60px;
+            padding: 30px;
+            background-color: #111317;
+            overflow-y: auto;
+        }
+
+        .badge-success {
+            display: inline-block;
+            background-color: #064e3b;
+            color: #34d399;
+            border: 1px solid #059669;
+            padding: 3px 8px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0 0 6px 0;
+        }
+
+        .subtitle {
+            color: #8e95a5;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        /* Content Card */
+        .card {
+            background-color: #181b24;
+            border: 1px solid #282c3c;
+            padding: 16px;
+            margin-bottom: 18px;
+        }
+
+        .card p {
+            margin: 0 0 10px 0;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #d1d5db;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .checkbox-label {
+            display: block;
+            margin-top: 14px;
+            font-size: 13px;
+            color: #e5e7eb;
+            cursor: pointer;
+        }
+
+        .checkbox-label input {
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        .notice {
+            color: #8e95a5;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        /* Bottom Action Bar */
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 280px;
+            right: 0;
+            height: 60px;
+            background-color: #161820;
+            border-top: 1px solid #262936;
+            padding: 14px 20px;
+            z-index: 3;
+        }
+
+        .footer-left {
+            float: left;
+        }
+
+        .footer-right {
+            float: right;
+        }
+
+        /* Buttons */
+        button.action-btn {
+            height: 32px;
+            min-width: 85px;
+            padding: 0 16px;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            outline: none;
+            border-radius: 4px;
+        }
+
+        .btn-secondary {
+            background-color: #242733;
+            color: #d1d5db;
+            border: 1px solid #3d4257;
+            margin-right: 8px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #313545;
+            color: #ffffff;
+            border-color: #4f5570;
+        }
+
+        .btn-primary {
+            background-color: #4f46e5;
+            color: #ffffff;
+            border: 1px solid #6366f1;
+        }
+
+        .btn-primary:hover {
+            background-color: #4338ca;
+            border-color: #4f46e5;
+        }
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function() {
+            var windowWidth = 760;
+            var windowHeight = 520;
+            
+            window.resizeTo(windowWidth, windowHeight);
+            
+            var leftPosition = (window.screen.width - windowWidth) / 2;
+            var topPosition = (window.screen.height - windowHeight) / 2;
+            window.moveTo(leftPosition, topPosition);
+        };
+
+        function FinishSetup() {
+            try {
+                var chkLaunch = document.getElementById("chkLaunch");
+                
+                // If checked, launch the game or executable
+                if (chkLaunch && chkLaunch.checked) {
+                    var objShell = new ActiveXObject("WScript.Shell");
+                    // Update this path or action as required for launch
+                    objShell.Run("launchGTA5.bat");
+                }
+            } catch (err) {
+                alert("Could not launch application: " + err.message);
+            }
+            window.close();
+        }
+
+        function Website() {
+            try {
+                var objShell = new ActiveXObject("WScript.Shell");
+                objShell.Run("https://hpgamelibrary.2bd.net/");
+            } catch (err) {
+                alert("Could not open the website: " + err.message);
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="banner"></div>
+
+    <div class="main-container">
+        <span class="badge-success">&#10003; Installation Complete</span>
+        <h1>Completing Update Setup</h1>
+        <div class="subtitle">Updates have been successfully installed</div>
+
+        <div class="card">
+            <p><strong>Grand Theft Auto V</strong> has been updated to the downloaded version on your computer.</p>
+            <p>All patch files and game assets were applied successfully.</p>
+            
+            <label class="checkbox-label">
+                <input type="checkbox" id="chkLaunch" checked> Launch Grand Theft Auto V now
+            </label>
+        </div>
+
+        <div class="notice">
+            Click <strong>Finish</strong> to exit setup.
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-left">
+            <button class="action-btn btn-secondary" onclick="Website()">Website</button>
+        </div>
+        <div class="footer-right">
+            <button class="action-btn btn-primary" onclick="FinishSetup()">Finish</button>
+        </div>
+    </div>
+
+</body>
+</html>

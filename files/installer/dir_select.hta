@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="ie=9">
+    <title>Grand Theft Auto V Update Installer - Select Directory</title>
+    
+    <HTA:APPLICATION
+        ID="MyHTA"
+        APPLICATIONNAME="GTA5UpdateInstaller"
+        BORDER="dialog"
+        SCROLL="no"
+        SINGLEINSTANCE="yes"
+        WINDOWSTATE="normal"
+        SYSMENU="yes"
+        CAPTION="yes"
+        INNERBORDER="no"
+        SELECTION="no"
+    >
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -ms-user-select: none;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111317;
+            color: #d1d5db;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Main Content Container - Expands Full Width */
+        .main-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 60px;
+            padding: 35px 40px;
+            background-color: #111317;
+            overflow-y: auto;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #1f2338;
+            color: #818cf8;
+            border: 1px solid #373b5e;
+            padding: 3px 8px;
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0 0 6px 0;
+        }
+
+        .subtitle {
+            color: #8e95a5;
+            font-size: 13px;
+            margin-bottom: 24px;
+        }
+
+        /* Content Card */
+        .card {
+            background-color: #181b24;
+            border: 1px solid #282c3c;
+            padding: 20px;
+            margin-bottom: 22px;
+            border-radius: 4px;
+        }
+
+        .card p {
+            margin: 0 0 14px 0;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #d1d5db;
+        }
+
+        /* Directory Picker Row */
+        .input-group {
+            width: 100%;
+            display: table;
+        }
+
+        .input-group-cell {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .dir-input {
+            width: 100%;
+            height: 34px;
+            padding: 0 12px;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-size: 13px;
+            color: #ffffff;
+            background-color: #111317;
+            border: 1px solid #373b5e;
+            border-radius: 4px;
+            user-select: text;
+            -ms-user-select: text;
+        }
+
+        .dir-input:focus {
+            outline: none;
+            border-color: #6366f1;
+        }
+
+        .browse-btn {
+            height: 34px;
+            padding: 0 16px;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            background-color: #242733;
+            color: #d1d5db;
+            border: 1px solid #3d4257;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+            white-space: nowrap;
+        }
+
+        .browse-btn:hover {
+            background-color: #313545;
+            color: #ffffff;
+            border-color: #4f5570;
+        }
+
+        .notice {
+            color: #8e95a5;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Bottom Action Bar - Full Width */
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: #161820;
+            border-top: 1px solid #262936;
+            padding: 14px 24px;
+            z-index: 3;
+        }
+
+        .footer-left {
+            float: left;
+        }
+
+        .footer-right {
+            float: right;
+        }
+
+        /* Footer Buttons */
+        button.action-btn {
+            height: 32px;
+            min-width: 85px;
+            padding: 0 16px;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            outline: none;
+            border-radius: 4px;
+        }
+
+        .btn-secondary {
+            background-color: #242733;
+            color: #d1d5db;
+            border: 1px solid #3d4257;
+            margin-right: 8px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #313545;
+            color: #ffffff;
+            border-color: #4f5570;
+        }
+
+        .btn-primary {
+            background-color: #4f46e5;
+            color: #ffffff;
+            border: 1px solid #6366f1;
+        }
+
+        .btn-primary:hover {
+            background-color: #4338ca;
+            border-color: #4f46e5;
+        }
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function() {
+            var windowWidth = 600;
+            var windowHeight = 440;
+            
+            window.resizeTo(windowWidth, windowHeight);
+            
+            var leftPosition = (window.screen.width - windowWidth) / 2;
+            var topPosition = (window.screen.height - windowHeight) / 2;
+            window.moveTo(leftPosition, topPosition);
+        };
+
+        // Native Shell folder picker dialog
+        function BrowseFolder() {
+            try {
+                var objShell = new ActiveXObject("Shell.Application");
+                var folder = objShell.BrowseForFolder(0, "Select Grand Theft Auto V installation folder:", 0x0040, 0);
+                if (folder != null) {
+                    document.getElementById("installPath").value = folder.Self.Path;
+                }
+            } catch (err) {
+                alert("Folder picker error: " + err.message);
+            }
+        }
+
+        // Writes chosen directory with quotes to dir.txt and launches notepad
+        function SaveAndNext() {
+            var path = document.getElementById("installPath").value;
+            
+            if (!path || path.replace(/^\s+|\s+$/g, '') === '') {
+                alert("Please enter or select a valid installation folder.");
+                return;
+            }
+
+            var cleanPath = path.replace(/^["']|["']$/g, '');
+            var formattedPath = '"' + cleanPath + '"';
+
+            try {
+                var fso = new ActiveXObject("Scripting.FileSystemObject");
+                var textFile = fso.CreateTextFile("dir.txt", true);
+                textFile.WriteLine(formattedPath);
+                textFile.Close();
+
+                var objShell = new ActiveXObject("WScript.Shell");
+                objShell.Run("run_installscript.vbs");
+                
+            } catch (err) {
+                alert("Could not process request: " + err.message);
+            }
+        }
+
+        function Website() {
+            try {
+                var objShell = new ActiveXObject("WScript.Shell");
+                objShell.Run("https://hpgamelibrary.2bd.net/");
+            } catch (err) {
+                alert("Could not open the website: " + err.message);
+            }
+        }
+
+        function CloseHTA() {
+            window.close();
+        }
+    </script>
+</head>
+<body>
+
+    <div class="main-container">
+        <span class="badge">HPGameLibrary Setup</span>
+        <h1>Select GTA V installation folder</h1>
+        <div class="subtitle">Where is your GTA V directory located?</div>
+
+        <div class="card">
+            <p>Setup will install files into the following folder. To select a different directory, click <strong>Browse</strong>.</p>
+            
+            <div class="input-group">
+                <div class="input-group-cell">
+                    <input type="text" id="installPath" class="dir-input" value="C:\Program Files (x86)\Grand Theft Auto V">
+                </div>
+                <div class="input-group-cell" style="width: 1%;">
+                    <button class="browse-btn" onclick="BrowseFolder()">Browse...</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="notice">
+            Click <strong>Install</strong> to proceed with the update, or <strong>Cancel</strong> to exit setup.
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-left">
+            <button class="action-btn btn-secondary" onclick="Website()">Website</button>
+        </div>
+        <div class="footer-right">
+            <button class="action-btn btn-secondary" onclick="CloseHTA()">Cancel</button>
+            <button class="action-btn btn-primary" onclick="SaveAndNext()">Install</button>
+        </div>
+    </div>
+
+</body>
+</html>
