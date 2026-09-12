@@ -1,0 +1,4 @@
+https://hpgamelibrary.2bd.net/ -main
+https://hpgamelibrary.github.io/ -mirror1
+https://hpgamelibrary.vercel.app/ -mirror2
+https://hpgamelibrary13.netlify.app/ -mirror3
