@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crackfix for Call of Duty: Modern Warfare 4</title>
+  <style>
+    :root {
+      --bg-dark: #0a0a0a;
+      --bg-card: #141414;
+      --red-primary: #e50914;
+      --red-hover: #ff1e27;
+      --red-glow: rgba(229, 9, 20, 0.25);
+      --text-main: #f0f0f0;
+      --text-muted: #a0a0a0;
+      --border-dark: #2a2a2a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Header & Banner */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid var(--border-dark);
+    }
+
+    .logo-banner {
+      display: inline-block;
+      margin-bottom: 1.2rem;
+    }
+
+    .logo-banner img {
+      max-width: 100%;
+      height: auto;
+      filter: drop-shadow(0 0 8px var(--red-glow));
+    }
+
+    h1 {
+      font-size: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #ffffff;
+      text-shadow: 0 2px 10px var(--red-glow);
+      margin-bottom: 1rem;
+    }
+
+    .alert-note {
+      display: inline-block;
+      background: rgba(229, 9, 20, 0.12);
+      border: 1px solid var(--red-primary);
+      color: #ff4d4d;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    /* Steps Layout */
+    .step-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-dark);
+      border-left: 4px solid var(--red-primary);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.75rem;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .step-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--red-primary);
+      box-shadow: 0 8px 24px var(--red-glow);
+    }
+
+    .step-title {
+      font-size: 1.35rem;
+      color: var(--red-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .step-title::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: var(--red-primary);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--red-primary);
+    }
+
+    .step-image {
+      margin-bottom: 1.25rem;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid #262626;
+      background-color: #000;
+    }
+
+    .step-image a {
+      display: block;
+      line-height: 0;
+    }
+
+    .step-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: opacity 0.2s ease;
+    }
+
+    .step-image img:hover {
+      opacity: 0.92;
+    }
+
+    .step-instruction {
+      font-size: 1.1rem;
+      color: var(--text-main);
+    }
+
+    /* Call to Action / Download Button */
+    .btn-download {
+      display: inline-block;
+      background-color: var(--red-primary);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 0.6rem 1.25rem;
+      border-radius: 4px;
+      margin-left: 0.5rem;
+      transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+      box-shadow: 0 4px 12px var(--red-glow);
+    }
+
+    .btn-download:hover {
+      background-color: var(--red-hover);
+      box-shadow: 0 6px 16px rgba(255, 30, 39, 0.5);
+      transform: translateY(-1px);
+    }
+
+    code {
+      background-color: #222;
+      color: #ff6b6b;
+      padding: 0.2rem 0.45rem;
+      border-radius: 4px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 0.95em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <a class="logo-banner" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizfZ13dNenfPnT2Cm4mri7yuPtNWpD-QYa9k_Zq5rESEn5F59mtmLmqUmU5RXtCYAvSdyqhr4MfOxBnyZT8ZX5NtC-7J85EIgU7SBotTfoMxLLixuHSOTbHOXovpJRPPzBHwqnpZGlLf6-bwV6sXFd9VM_6ejFlFfNNqaTvMGhTdaSiphCibbKrUACLCrb/s1600/image.png" target="_blank" rel="noopener">
+        <img alt="Header Banner" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEizfZ13dNenfPnT2Cm4mri7yuPtNWpD-QYa9k_Zq5rESEn5F59mtmLmqUmU5RXtCYAvSdyqhr4MfOxBnyZT8ZX5NtC-7J85EIgU7SBotTfoMxLLixuHSOTbHOXovpJRPPzBHwqnpZGlLf6-bwV6sXFd9VM_6ejFlFfNNqaTvMGhTdaSiphCibbKrUACLCrb/w354-h54/image.png" width="354" height="54" />
+      </a>
+      <h1>Crackfix for Call of Duty: Modern Warfare 4</h1>
+      <div class="alert-note">Note: This fix only works for HPGAMELIBRARY</div>
+    </header>
+
+    <main>
+      <!-- STEP 1 -->
+      <section class="step-card">
+        <h2 class="step-title">Step 1</h2>
+        <div class="step-image">
+          <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcSjN79yPNyurpRh4xGtEw3mkZWmzSLO060o2dmEelVE01XXWGk-FI3952miNP7_KEu_KKjtbctW6zJrJsYgUcO7oLinx35Fm7-_zTfH0ointbyKm2vA3AvQca8zmbJLlmti_1CE0a0ZYmBh_FTtSTiPqjaXCsWlyCSCjYkJovojpdXd64x9tU_67yoDwn/s1600/image.png" target="_blank" rel="noopener">
+            <img alt="Step 1 Screenshot" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhcSjN79yPNyurpRh4xGtEw3mkZWmzSLO060o2dmEelVE01XXWGk-FI3952miNP7_KEu_KKjtbctW6zJrJsYgUcO7oLinx35Fm7-_zTfH0ointbyKm2vA3AvQca8zmbJLlmti_1CE0a0ZYmBh_FTtSTiPqjaXCsWlyCSCjYkJovojpdXd64x9tU_67yoDwn/w640-h360/image.png" />
+          </a>
+        </div>
+        <p class="step-instruction">
+          Download this file: 
+          <a class="btn-download" href="https://drive.google.com/file/d/1YQejh1mAPgRnFnsN51-E69NVVAjraASR/view?usp=sharing" target="_blank" rel="noopener">PlayMW4.exe</a>
+        </p>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step-card">
+        <h2 class="step-title">Step 2</h2>
+        <div class="step-image">
+          <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi2zg709urCWFM2ApMS_YhpTK4HNv_i2WDE9lB1nBGhEFASSW6EqUc8Hzaiy7GNfE52ZTW3JO3uKD34M4mliaC8u71kqux4rNof4m1J9s30fT5OuUsOohOKx9y1pzA4vVW9_FLG7cvcbbEpxvyPkU6_TZZIo3exG07CgdLowA-6CwJYWJKVfnPiufGA7AIl/s1600/image.png" target="_blank" rel="noopener">
+            <img alt="Step 2 Screenshot" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi2zg709urCWFM2ApMS_YhpTK4HNv_i2WDE9lB1nBGhEFASSW6EqUc8Hzaiy7GNfE52ZTW3JO3uKD34M4mliaC8u71kqux4rNof4m1J9s30fT5OuUsOohOKx9y1pzA4vVW9_FLG7cvcbbEpxvyPkU6_TZZIo3exG07CgdLowA-6CwJYWJKVfnPiufGA7AIl/w640-h376/image.png" />
+          </a>
+        </div>
+        <p class="step-instruction">Copy the downloaded file.</p>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step-card">
+        <h2 class="step-title">Step 3</h2>
+        <div class="step-image">
+          <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-fowGV3FoJif50ffT8m5OGRwFhkzQza6-3_YEZBoT45SvSu64t1miQyaCoEo5cz3YKMDFFkVXgC-d6TRvezCh3bHdhvoWWNEN8DtKVWMGCu_kETPvYtIV6WjXKgyTBC6X9WYAe6gAU3NIOCWWHbgTzse5qMJF9PLph-f7chmZXxtMzAng1Zo3z2m0NG2e/s1600/image.png" target="_blank" rel="noopener">
+            <img alt="Step 3 Screenshot" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj-fowGV3FoJif50ffT8m5OGRwFhkzQza6-3_YEZBoT45SvSu64t1miQyaCoEo5cz3YKMDFFkVXgC-d6TRvezCh3bHdhvoWWNEN8DtKVWMGCu_kETPvYtIV6WjXKgyTBC6X9WYAe6gAU3NIOCWWHbgTzse5qMJF9PLph-f7chmZXxtMzAng1Zo3z2m0NG2e/w640-h360/image.png" />
+          </a>
+        </div>
+        <p class="step-instruction">Right-click the MW4 shortcut on your desktop and click <code>Open file location</code>.</p>
+      </section>
+
+      <!-- STEP 4 -->
+      <section class="step-card">
+        <h2 class="step-title">Step 4</h2>
+        <div class="step-image">
+          <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi5CpgZ1ytQCllOmg_UAZsa3Lij0vtPIUUtCurO-mcVBcXGXZipo5sQI-kY-D5tOgxzHeG1ldsxAuKja0AQJG-NuOgaP6kP5bKzEXN_kxP_pddtRS7wNdPiG3nto7I8P3_eHFoTEQPwCdFso41Srmi-no-yTI1SNKFOZO0ChlKe2DPzyfp9l5l3qVX7EaJM/s1600/image.png" target="_blank" rel="noopener">
+            <img alt="Step 4 Screenshot" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi5CpgZ1ytQCllOmg_UAZsa3Lij0vtPIUUtCurO-mcVBcXGXZipo5sQI-kY-D5tOgxzHeG1ldsxAuKja0AQJG-NuOgaP6kP5bKzEXN_kxP_pddtRS7wNdPiG3nto7I8P3_eHFoTEQPwCdFso41Srmi-no-yTI1SNKFOZO0ChlKe2DPzyfp9l5l3qVX7EaJM/w640-h376/image.png" />
+          </a>
+        </div>
+        <p class="step-instruction">Paste the file into the directory.</p>
+      </section>
+
+      <!-- STEP 5 -->
+      <section class="step-card">
+        <h2 class="step-title">Step 5</h2>
+        <div class="step-image">
+          <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgr6BvOowWHiyrpWV4j4eHl9UYSeKoFJT6Fy6bK3pdrO2z5e62hVhto7X4mesMRYgz3QXzoko3pOe0HjiM6IzafNIR_X6AZgIZ_VgSKbNg0qFhSsXNLIrCfo00rAR2NvmmfD6JwRR1odvhLBDgw_cbKOGjz9X-aRkoQrgEA_vHkNtd9FT_Yek_cSfD8E-VG/s1600/image.png" target="_blank" rel="noopener">
+            <img alt="Step 5 Screenshot" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgr6BvOowWHiyrpWV4j4eHl9UYSeKoFJT6Fy6bK3pdrO2z5e62hVhto7X4mesMRYgz3QXzoko3pOe0HjiM6IzafNIR_X6AZgIZ_VgSKbNg0qFhSsXNLIrCfo00rAR2NvmmfD6JwRR1odvhLBDgw_cbKOGjz9X-aRkoQrgEA_vHkNtd9FT_Yek_cSfD8E-VG/w640-h414/image.png" />
+          </a>
+        </div>
+        <p class="step-instruction">Click <code>Replace the file in the destination</code>.</p>
+      </section>
+
+      <!-- STEP 6 -->
+      <section class="step-card">
+        <h2 class="step-title">Step 6</h2>
+        <div class="step-image">
+          <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgjAtvB3qP0MzmIB-WBio-BOxbzwvU508q7z6nsCKiDS8TLZxJtnkZ2HXjZh4OlzN6_x7qDE-yqCdr-K_ENs3M9vZoKG03GSNm3EermUEqfcLCjO3Kmk_fQ7iviA0dHm26eMd6DIUJL-bN7T5e_T-giHn7_gr3cytPhn4i8Up5CbawWhHfIR71xIEn_mqS2/s1600/image.png" target="_blank" rel="noopener">
+            <img alt="Step 6 Screenshot" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgjAtvB3qP0MzmIB-WBio-BOxbzwvU508q7z6nsCKiDS8TLZxJtnkZ2HXjZh4OlzN6_x7qDE-yqCdr-K_ENs3M9vZoKG03GSNm3EermUEqfcLCjO3Kmk_fQ7iviA0dHm26eMd6DIUJL-bN7T5e_T-giHn7_gr3cytPhn4i8Up5CbawWhHfIR71xIEn_mqS2/w640-h360/image.png" />
+          </a>
+        </div>
+        <p class="step-instruction">Launch the game and enjoy!</p>
+      </section>
+    </main>
+  </div>
+
+</body>
+</html>
