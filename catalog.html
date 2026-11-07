@@ -144,35 +144,37 @@
             z-index: 10;
         }
 
-        /* Movie card styling - Updated to match theme */
+        /* Movie card styling - Removed backdrop-filter & fractional scale to prevent texture blurring */
         .movie-card {
             position: relative;
-            display: block; 
+            display: flex;
+            flex-direction: column;
             text-decoration: none; 
             color: inherit; 
-            background-color: rgba(15, 0, 0, 0.7);
-            backdrop-filter: blur(3px);
+            background-color: rgba(15, 0, 0, 0.9);
             border: 1px solid #330000;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0,0,0,0.8);
-            transition: all 0.3s ease;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
             cursor: pointer; 
         }
 
         .movie-card:hover {
-            transform: translateY(-5px) scale(1.02);
+            transform: translateY(-6px);
             box-shadow: 0 0 20px rgba(255, 42, 42, 0.5);
             border-color: #ff2a2a;
-            background-color: rgba(25, 0, 0, 0.85);
+            background-color: rgba(25, 0, 0, 0.95);
         }
 
-        /* Online Badge styling matching reference image */
-        .online-badge {
+        /* Shared Badge styling */
+        .online-badge,
+        .torrent-badge,
+        .portable-badge,
+        .zip-badge {
             position: absolute;
             top: 0;
             left: 0;
-            background: #9b4dca;
             color: #ffffff;
             font-size: 0.75rem;
             font-weight: 700;
@@ -180,26 +182,57 @@
             padding: 4px 10px;
             border-bottom-right-radius: 4px;
             z-index: 2;
-            text-transform: capitalize;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
             pointer-events: none;
         }
 
-.movie-poster {
-    width: 100%;
-    aspect-ratio: 2 / 3;
-    object-fit: cover;
-    background-color: #111;
-    border-bottom: 1px solid #330000;
-    transition: border-color 0.3s;
-}
+        /* Badge Colors */
+        .online-badge { background: #9b4dca; }
+        .torrent-badge { background: #22c55e; }
+        .portable-badge { background: #3b82f6; }
+        .zip-badge { background: #ec4899; }
+
+        /* Automatic vertical stacking when 2 badges are on the same card */
+        .online-badge ~ .torrent-badge,
+        .online-badge ~ .portable-badge,
+        .online-badge ~ .zip-badge,
+        .torrent-badge ~ .portable-badge,
+        .torrent-badge ~ .zip-badge,
+        .portable-badge ~ .zip-badge {
+            top: 26px;
+            border-top-right-radius: 4px;
+        }
+
+        /* Automatic vertical stacking when 3 badges are on the same card */
+        .online-badge ~ .torrent-badge ~ .portable-badge,
+        .online-badge ~ .torrent-badge ~ .zip-badge,
+        .online-badge ~ .portable-badge ~ .zip-badge,
+        .torrent-badge ~ .portable-badge ~ .zip-badge {
+            top: 52px;
+            border-top-right-radius: 4px;
+        }
+
+        /* Crisp, unstretched, high-clarity poster rendering */
+        .movie-poster {
+            display: block;
+            width: 100%;
+            aspect-ratio: 2 / 3;
+            object-fit: contain;
+            background-color: #050000;
+            border-bottom: 1px solid #330000;
+            transition: border-color 0.3s, filter 0.3s;
+            image-rendering: high-quality;
+            filter: contrast(1.04) saturate(1.05) url(#crisp-sharpen);
+        }
         
         .movie-card:hover .movie-poster {
             border-bottom: 1px solid #ff2a2a;
+            filter: contrast(1.08) saturate(1.1) url(#crisp-sharpen);
         }
 
         .movie-info {
             padding: 15px;
+            flex-grow: 1;
         }
 
         .movie-title {
@@ -222,7 +255,7 @@
 
         .movie-genre {
             font-size: 0.75rem;
-            color: #ff6666; /* Matching the hero paragraph color from reference */
+            color: #ff6666;
             margin-bottom: 8px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -245,6 +278,18 @@
     </style>
 </head>
 <body>
+
+    <!-- Subtle SVG Convolution Filter to keep downscaled cover art razor-sharp -->
+    <svg width="0" height="0" style="position: absolute; pointer-events: none;">
+        <defs>
+            <filter id="crisp-sharpen">
+                <feConvolveMatrix order="3" preserveAlpha="true" kernelMatrix="
+                     0   -0.15   0
+                   -0.15  1.6  -0.15
+                     0   -0.15   0" />
+            </filter>
+        </defs>
+    </svg>
 
     <header>
         <div class="logo">HPGameLibrary</div>
@@ -428,7 +473,7 @@
         </a>
         
         <a href="/games/GTA4" class="movie-card" data-trending="0">
-            <img class="movie-poster" src="https://cdn2.steamgriddb.com/thumb/f7e560ff0b4ff781bd6d3b2ec442daee.jpg" alt="GTA IV Poster">
+            <img class="movie-poster" src="https://cdn2.steamgriddb.com/grid/f7e560ff0b4ff781bd6d3b2ec442daee.jpg" alt="GTA IV Poster">
             <div class="movie-info">
                 <h2 class="movie-title">Grand Theft Auto IV</h2>
                 <div class="movie-meta">
@@ -441,6 +486,8 @@
         </a>
         
         <a href="/games/FH6" class="movie-card" data-trending="0">
+            <span class="torrent-badge">Torrent</span>
+            <span class="portable-badge">Portable</span>
             <img class="movie-poster" src="https://cdn2.steamgriddb.com/grid/005c3dcb8b95f0ead48dcef46d7a934b.png" alt="FH6 Poster">
             <div class="movie-info">
                 <h2 class="movie-title">Forza Horizon 6</h2>
@@ -468,6 +515,7 @@
         </a>
         
         <a href="/games/FH4" class="movie-card" data-trending="0">
+            <span class="torrent-badge">Torrent</span>
             <img class="movie-poster" src="https://cdn2.steamgriddb.com/grid/ab704bd383ad12c1e7f6bcaa0da165b0.png" alt="FH4 Poster">
             <div class="movie-info">
                 <h2 class="movie-title">Forza Horizon 4</h2>
@@ -510,6 +558,7 @@
         
         <a href="/games/RE6" class="movie-card" data-trending="0">
             <span class="online-badge">Online</span>
+            <span class="torrent-badge">Torrent</span>
             <img class="movie-poster" src="https://cdn2.steamgriddb.com/grid/6169019826fe999b0eba05cee8c75c78.png" alt="RE6 Poster">
             <div class="movie-info">
                 <h2 class="movie-title">Resident Evil 6</h2>
@@ -536,6 +585,7 @@
         </a>
         
         <a href="/games/Cyberpunk2077" class="movie-card" data-trending="0">
+            <span class="torrent-badge">Torrent</span>
             <img class="movie-poster" src="https://shared.steamstatic.com/store_item_assets/steam/apps/1091500/fc7064f4a8ee2960eb51f5872d7990d771f26d2e/library_600x900_2x.jpg?t=1753355535" alt="Cyberpunk Poster">
             <div class="movie-info">
                 <h2 class="movie-title">Cyberpunk 2077</h2>
@@ -669,7 +719,7 @@
         
         <a href="https://gamedeep241.github.io/games/EscapeTheBackrooms/" class="movie-card" data-trending="0">
             <span class="online-badge">Online</span>
-            <img class="movie-poster" src="https://shared.steamstatic.com/store_item_assets/steam/apps/1943950/library_600x900_2x.jpg?t=1761247136" alt="FH3 Poster">
+            <img class="movie-poster" src="https://shared.steamstatic.com/store_item_assets/steam/apps/1943950/library_600x900_2x.jpg?t=1761247136" alt="Escape The Backrooms Poster">
             <div class="movie-info">
                 <h2 class="movie-title">Escape The Backrooms</h2>
                 <div class="movie-meta">
@@ -682,7 +732,7 @@
         </a>
 
         <a href="/games/SpidermanMilesMorales" class="movie-card" data-trending="0">
-            <img class="movie-poster" src="https://shared.steamstatic.com/store_item_assets/steam/apps/1817190/library_600x900.jpg?t=1750955016">
+            <img class="movie-poster" src="https://shared.steamstatic.com/store_item_assets/steam/apps/1817190/library_600x900_2x.jpg?t=1750955016">
             <div class="movie-info">
                 <h2 class="movie-title">Marvel's Spider-man Miles Morales</h2>
                 <div class="movie-meta">
@@ -707,12 +757,13 @@
             </div>
         </a>
 
-        <a href="/games/NFSMostWanted" class="movie-card" data-trending="0">
-            <img class="movie-poster" src="https://shared.steamstatic.com/store_item_assets/steam/apps/1262560/library_600x900_2x.jpg?t=1604159708">
+        <a href="/games/FH5" class="movie-card" data-trending="0">
+            <span class="torrent-badge">Torrent</span>
+            <img class="movie-poster" src="https://ic-cdn.flipboard.com/cgmagonline.com/fd21091eb868a561d612fded5f93432922fed155/_large.jpeg">
             <div class="movie-info">
-                <h2 class="movie-title">Need for Speed: Most Wanted</h2>
+                <h2 class="movie-title">Forza Horizon 5</h2>
                 <div class="movie-meta">
-                    <span class="year">2012</span>
+                    <span class="year">2021</span>
                     <span class="rating"></span>
                 </div>
                 <div class="movie-genre"></div>
@@ -752,6 +803,79 @@
                 <h2 class="movie-title">Uncharted: The Nathan Drake Collection</h2>
                 <div class="movie-meta">
                     <span class="year">2015</span>
+                    <span class="rating"></span>
+                </div>
+                <div class="movie-genre"></div>
+                <p class="movie-description"></p>
+            </div>
+        </a>
+
+        <a href="https://gamedeep241.github.io/games/L4D2/" class="movie-card" data-trending="0">
+            <span class="online-badge">Online</span>
+            <img class="movie-poster" src="https://shared.steamstatic.com/store_item_assets/steam/apps/550/library_600x900_2x.jpg?t=1745368559">
+            <div class="movie-info">
+                <h2 class="movie-title">Left 4 Dead 2</h2>
+                <div class="movie-meta">
+                    <span class="year">2009</span>
+                    <span class="rating"></span>
+                </div>
+                <div class="movie-genre"></div>
+                <p class="movie-description"></p>
+            </div>
+        </a>
+
+        <a href="/games/NFSMostWanted" class="movie-card" data-trending="0">
+            <span class="zip-badge">ZIP file</span>
+            <img class="movie-poster" src="https://file.garden/aubj44M23CbDhTMR/Gemini_Generated_Image_650qu9650qu9650q.png">
+            <div class="movie-info">
+                <h2 class="movie-title">Need for Speed: Most Wanted</h2>
+                <div class="movie-meta">
+                    <span class="year">2005</span>
+                    <span class="rating"></span>
+                </div>
+                <div class="movie-genre"></div>
+                <p class="movie-description"></p>
+            </div>
+        </a>
+
+        <a href="/games/CODMW-2019" class="movie-card" data-trending="0">
+            <span class="torrent-badge">Torrent</span>
+            <span class="portable-badge">Portable</span>
+            <img class="movie-poster" src="https://e.snmc.io/lk/f/x/80bcb5aa3e8369cd6efe77d2f6d485d7/11239746">
+            <div class="movie-info">
+                <h2 class="movie-title">Call of Duty: Modern Warfare</h2>
+                <div class="movie-meta">
+                    <span class="year">2019</span>
+                    <span class="rating"></span>
+                </div>
+                <div class="movie-genre"></div>
+                <p class="movie-description"></p>
+            </div>
+        </a>
+
+        <a href="/games/MWII" class="movie-card" data-trending="0">
+            <span class="torrent-badge">Torrent</span>
+            <span class="zip-badge">ZIP file</span>
+            <img class="movie-poster" src="https://m.media-amazon.com/images/I/81mUtFXhFCL.jpg">
+            <div class="movie-info">
+                <h2 class="movie-title">Call of Duty: Modern Warfare II</h2>
+                <div class="movie-meta">
+                    <span class="year">2022</span>
+                    <span class="rating"></span>
+                </div>
+                <div class="movie-genre"></div>
+                <p class="movie-description"></p>
+            </div>
+        </a>
+
+        <a href="/games/CODMW3" class="movie-card" data-trending="0">
+            <span class="torrent-badge">Torrent</span>
+            <span class="portable-badge">Portable</span>
+            <img class="movie-poster" src="https://shared.steamstatic.com/store_item_assets/steam/apps/3595270/a3070fe258d1e2a0232aad783d34f927629dbd21/library_capsule_2x.jpg?t=1753807684">
+            <div class="movie-info">
+                <h2 class="movie-title">Call of Duty: Modern Warfare III</h2>
+                <div class="movie-meta">
+                    <span class="year">2023</span>
                     <span class="rating"></span>
                 </div>
                 <div class="movie-genre"></div>
@@ -824,7 +948,7 @@
                 let title = card.querySelector('.movie-title').textContent.toLowerCase(); 
                 
                 if (title.includes(input)) {
-                    card.style.display = "block"; 
+                    card.style.display = "flex"; 
                 } else {
                     card.style.display = "none"; 
                 }
